@@ -474,6 +474,52 @@ summarized above also apply to interfacial contact prediction for protein
 complexes but may be less effective since on average protein complexes have
 fewer sequence homologs.
 
+### Protein-protein interactions or Protein binding (not C, but P and DNA/RNA)
+
+Protein-protein interactions (PPIs) are highly specific and non-accidental
+physical contacts between proteins which occur for purposes other than generic
+protein production or degradation [@doi:10.1371/journal.pcbi.1000807]. Such
+interactions (*Form the basis of much of what goes on in cells, citation.*)
+Abundant data have been generated in-part thanks to advances in high-throughput
+screening methods like yeast two-hybrid and affinity-purification with mass
+spectrometry. However, Because many PPIs are transient or dependent on
+biological context, high-throughput methods can fail to capture (*certain*)
+interactions. Additionally, high-throughput screens for PPIs can (*have false
+positives, [citation]*).
+
+(*Something referencing PPI extraction from the literature with NLP eg.
+ doi.org/10.1016/j.ijmedinf.2009.04.010 This can also help because we can
+ use low-throughput experimental results and still generate large datasets. [
+ actually probably this is extraneous information. think really hard before
+ putting this in.]*)
+
+
+(*Computational methods show promise for predicting PPIs. [some kind of
+  introduction to using computational prediction here, specifically deep
+  learning]*)
+
+As discussed above, (*many*) protein structures are not yet known. Therefore,
+the ability to predict PPI and protein binding based on protein sequence is
+extremely useful.
+
+In the context of protein interaction prediction-- as in other
+domains-- deep learning shows promise for exceeding current predictive
+performance in PPI and protein binding.
+
+Sun et al. [@doi:10.1186/s12859-017-1700-2] used sequence-based data in a
+stacked autoencoder to predict PPI in humans with high accuracy. Unlike several
+previous studies, they used an external test set and achieved superior
+performance to previous methods. Additionally, (*they found high performance,
+[rephrase]*) when applying their model to protein sequence data from three
+model organism species. (*This is an opportunity for more research*)
+
+
+
+([@doi:10.1093/bioinformatics/btq483] *Reference the problem with lacking
+  negative data in the datasets. Too much is positive, it overinflates the
+  estimates. Also this paper gives a method to generate more negative data.
+  Could potentially also tangent into generating negative data.*)
+
 ### Morphological phenotypes
 
 A field poised for dramatic revolution by deep learning is bioimage analysis.
