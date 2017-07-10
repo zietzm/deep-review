@@ -478,40 +478,47 @@ fewer sequence homologs.
 
 Protein-protein interactions (PPIs) are highly specific and non-accidental
 physical contacts between proteins which occur for purposes other than generic
-protein production or degradation [@doi:10.1371/journal.pcbi.1000807]. Such
-interactions (*Form the basis of much of what goes on in cells, citation.*)
+protein production or degradation [@doi:10.1371/journal.pcbi.1000807]. PPIs
+are key to many cellular processes like metabolism and immune responses.
 Abundant data have been generated in-part thanks to advances in high-throughput
 screening methods like yeast two-hybrid and affinity-purification with mass
-spectrometry. However, Because many PPIs are transient or dependent on
-biological context, high-throughput methods can fail to capture (*certain*)
-interactions. Additionally, high-throughput screens for PPIs can (*have false
-positives, [citation]*).
+spectrometry. Because many PPIs are transient or dependent on biological
+context-- however-- high-throughput methods can fail to capture a number of
+interactions. Additionally, common types of high-throughput screens for PPIs
+like the yeast two-hybrid have issues with high rates of false positive results
+[@doi:10.1186/s12964-015-0116-8 @doi:10.1002/pmic.200800150].
 
-(*Something referencing PPI extraction from the literature with NLP eg.
- doi.org/10.1016/j.ijmedinf.2009.04.010 This can also help because we can
- use low-throughput experimental results and still generate large datasets. [
- actually probably this is extraneous information. think really hard before
- putting this in.]*)
+Many early machine learning applications to PPI focused on the extraction
+of known relationships from the literature through text mining
+[@doi:10.1016/j.jbi.2007.11.008]. However, computational methods show increasing
+promise for the prediction of novel PPIs. Singh et al.
+[@doi:10.1093/nar/gkq481] used a structure-based machine learning
+approach called Struct2Net to predict PPIs from comparisons of sequence data
+to structures in the Protein Data Bank. While this approach had the advantage of
+requiring only sequence data-- not functional information like previous work
+it was still limited by the coverage of the Protein Data Bank.
 
+In the context of PPIs and protein binding-- as in other domains-- deep learning
+shows promise for exceeding current predictive performance and circumventing
+limitations from which other types of approaches suffer.
 
-(*Computational methods show promise for predicting PPIs. [some kind of
-  introduction to using computational prediction here, specifically deep
-  learning]*)
+Zhang et al. [@doi:10.1038/nature11503] trained a Bayesian network on
+three-dimensional structural information which predicted PPIs with accuracy
+near and even somewhat above that of high-throughput experimentation. The
+authors noted that computational predictions often differed from experimental
+results, indicating one of the potential benefits in combining computational and
+experimental results.
 
-As discussed above, (*many*) protein structures are not yet known. Therefore,
-the ability to predict PPI and protein binding based on protein sequence is
-extremely useful.
-
-In the context of protein interaction prediction-- as in other
-domains-- deep learning shows promise for exceeding current predictive
-performance in PPI and protein binding.
-
-Sun et al. [@doi:10.1186/s12859-017-1700-2] used sequence-based data in a
-stacked autoencoder to predict PPI in humans with high accuracy. Unlike several
-previous studies, they used an external test set and achieved superior
-performance to previous methods. Additionally, (*they found high performance,
-[rephrase]*) when applying their model to protein sequence data from three
-model organism species. (*This is an opportunity for more research*)
+While many structures are now known, a sizeable portion of protein structures
+remain unknown [@doi:10.1126/science.aah4043]. Therefore, the ability to predict
+PPI and protein binding based on protein sequence is extremely useful. Sun et
+al. [@doi:10.1186/s12859-017-1700-2] used sequence-based data in a stacked
+autoencoder to predict PPI in humans with high accuracy. (*Unlike several previous
+studies, they used an external test set and achieved superior performance to
+previous methods.*) Additionally, their predictive model performed well when
+generalized to protein sequence data from three model organism species.
+(*This is an opportunity for more research, or this shows that deep learning is 
+  widely "reusable"?*)
 
 
 
@@ -519,6 +526,9 @@ model organism species. (*This is an opportunity for more research*)
   negative data in the datasets. Too much is positive, it overinflates the
   estimates. Also this paper gives a method to generate more negative data.
   Could potentially also tangent into generating negative data.*)
+
+
+
 
 ### Morphological phenotypes
 
@@ -749,7 +759,7 @@ from the reference as the alpha value. The neural network outputs genotype
 probabilities for each candidate variant. They were able to achieve better
 performance than GATK, a leading genotype caller, even when GATK was given
 information about population variation for each candidate variant. Another
-method, still in its infancy, hand-developed 642 features for each candidate
+method, still in its infancy, hand-developed 62 features for each candidate
 variant and fed these vectors into a fully connected deep neural network
 [@tag:Torracinta2016_deep_snp]. Unfortunately, this feature set required at
 least 15 iterations of software development to fine-tune, which suggests that
