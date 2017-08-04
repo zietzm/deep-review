@@ -98,15 +98,15 @@ skipping subsets of exons or including parts of introns, creating enormous
 spatiotemporal flexibility to generate multiple distinct proteins from a single
 gene. This remarkable complexity can lend itself to defects that underlie many
 diseases. For instance, splicing mutations in the lamin A (*LMNA*) gene can lead to specific
-variants of dilated cardiomyopathy and limb girdle muscular dystrophy 
-[@tag:Scotti2016_missplicing]. 
+variants of dilated cardiomyopathy and limb girdle muscular dystrophy
+[@tag:Scotti2016_missplicing].
 A recent study found that quantitative trait loci
 that affect splicing in lymphoblastoid cell lines are enriched within risk loci
 for schizophrenia, multiple sclerosis, and other immune diseases, implicating
 mis-splicing as a more widespread feature of human pathologies than previously
 thought [@tag:Li2016_variation]. Therapeutic strategies that aim to modulate
 splicing are also currently being considered for disorders such as Duchenne muscular dystrophy
-and spinal muscular atrophy [@tag:Scotti2016_missplicing]. 
+and spinal muscular atrophy [@tag:Scotti2016_missplicing].
 
 Sequencing studies routinely return thousands of unannotated variants, but which
 cause functional changes in splicing and how are those changes manifested?
@@ -476,6 +476,83 @@ proteins with few or no sequence homologs. Finally, the deep learning methods
 summarized above also apply to interfacial contact prediction for protein
 complexes but may be less effective since on average protein complexes have
 fewer sequence homologs.
+
+
+### Protein-protein interactions
+
+Protein-protein interactions (PPIs) are highly specific and non-accidental
+physical contacts between proteins which occur for purposes other than generic
+protein production or degradation [@doi:10.1371/journal.pcbi.1000807]. PPIs
+are key to many cellular processes like metabolism and immune responses.
+Abundant data have been generated in-part thanks to advances in high-throughput
+screening methods like yeast two-hybrid and affinity-purification with mass
+spectrometry. Because many PPIs are transient or dependent on biological
+context— however— high-throughput methods can fail to capture a number of
+interactions. Additionally, common types of high-throughput screens for PPIs
+like the yeast two-hybrid have issues with high rates of false positive results
+[@doi:10.1186/s12964-015-0116-8 @doi:10.1002/pmic.200800150].
+
+Many early machine learning and deep learning applications to PPI focused on the extraction
+of known relationships from the literature through text mining
+[@doi:10.1016/j.jbi.2007.11.008] (*Add a citation for a deep learning text mining paper here.*). However, computational methods show increasing
+promise for the prediction of novel PPIs. Singh et al.
+[@doi:10.1093/nar/gkq481] used a structure-based machine learning
+approach called Struct2Net to predict PPIs from comparisons of sequence data
+to structures in the Protein Data Bank. While this approach had the advantage of
+requiring only sequence data— not functional information like previous work
+it was still limited by the coverage of the Protein Data Bank. (*Zhang et al.
+[@doi:10.1038/nature11503] trained a Bayesian network on
+three-dimensional structural information which predicted PPIs with accuracy
+near and even somewhat above that of high-throughput experimentation.*)
+
+In the context of PPIs and protein binding— as in other domains— deep learning
+shows promise both for exceeding current predictive performance and for circumventing
+limitations from which other types of approaches suffer.
+DeepPPI [@doi:10.1021/acs.jcim.7b00028] was able to make high-quality PPI predictions
+from a set of protein descriptors by using a pair of deep neural sub-networks to
+learn the features of individual proteins which are useful for predicting interactions.
+The outputs of the two neural networks were then combined as inputs for the final
+stage of the neural network which made predictions.
+
+While many structures are now known, a sizeable portion of protein structures
+remain unknown [@doi:10.1126/science.aah4043]. Therefore, the ability to predict
+PPI and protein binding based on protein sequence is also extremely useful.
+
+Sun et al. [@doi:10.1186/s12859-017-1700-2] used sequence-based data in a stacked
+autoencoder to predict PPIs in humans with high accuracy. Their model additionally
+performed well when generalized to protein sequence data from model organism species.
+
+Wang et al. [@doi:10.1039/C7MB00188F] extracted Zernike moments from protein sequences
+and utilized a stacked sparse autoencoder to reduce feature dimensions and noisiness
+before making PPI predictions with a unique classification vector machine.
+
+
+Beyond predicting whether two proteins interact, Du et al. showed that a tandem
+stacked-autoencoder/deep-neural-network method could be used to predict residue
+contacts for the interfacial regions of interacting protieins. Their method
+exceeded classical machine learning accuracy by 15 percent
+[@doi:10.1016/j.ymeth.2016.06.001].
+
+#### MHC subsection
+
+An important type of PPI involves the recognition of an organisms own cells by
+the immune system. Because the major histocompatibility complex (MHC) play a significant
+role in regulating this proces, peptide-MHC binding prediction is an important problem in
+computation biology. Several approaches have shown promise.
+
+Kuksa et al. [@doi:10.1093/bioinformatics/btv371] pre-trained a higher-order
+neural network using a semi-restricted Boltzmann machine and showed performance
+above the state-of-the-art with the higher-order neural network, as well as with
+a more standard deep neural network. They also propose a higher-order SVM,
+which, when paired with the HONN showed superior performance even to DNN.
+
+
+
+([@doi:10.1093/bioinformatics/btq483] *Reference the problem with lacking
+negative data in the datasets. Too much is positive, it overinflates the
+estimates. Also this paper gives a method to generate more negative data.
+Could potentially also tangent into generating negative data.*)
+
 
 ### Morphological phenotypes
 
