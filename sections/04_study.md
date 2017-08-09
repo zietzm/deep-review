@@ -477,81 +477,44 @@ summarized above also apply to interfacial contact prediction for protein
 complexes but may be less effective since on average protein complexes have
 fewer sequence homologs.
 
+### Protein-Protein Interactions
 
-### Protein-protein interactions
+Protein-protein interactions (PPIs) are highly specific and non-accidental physical contacts between proteins which occur for purposes other than generic protein production or degradation [@doi:10.1371/journal.pcbi.1000807]. PPIs are key to many cellular processes like metabolism and immune responses. Abundant interaction data have been generated in-part thanks to advances in high-throughput screening methods like yeast two-hybrid and affinity-purification with mass spectrometry. Because many PPIs are transient or dependent on biological context— however— high-throughput methods can fail to capture a number of interactions. Additionally, common types of high-throughput screens for PPIs like the yeast two-hybrid can have issues with high rates of false positive results [@doi:10.1186/s12964-015-0116-8 @doi:10.1002/pmic.200800150].
 
-Protein-protein interactions (PPIs) are highly specific and non-accidental
-physical contacts between proteins which occur for purposes other than generic
-protein production or degradation [@doi:10.1371/journal.pcbi.1000807]. PPIs
-are key to many cellular processes like metabolism and immune responses.
-Abundant data have been generated in-part thanks to advances in high-throughput
-screening methods like yeast two-hybrid and affinity-purification with mass
-spectrometry. Because many PPIs are transient or dependent on biological
-context— however— high-throughput methods can fail to capture a number of
-interactions. Additionally, common types of high-throughput screens for PPIs
-like the yeast two-hybrid have issues with high rates of false positive results
-[@doi:10.1186/s12964-015-0116-8 @doi:10.1002/pmic.200800150].
+This section will focus on advances in *de novo *PPI prediction. Many machine learning and deep learning approaches to PPI focused on text mining to extract known relationships from the literature [@doi:10.1016/j.jbi.2007.11.008 @arxiv:1706.01556v2]. Early *de novo* prediction approaches used a variety of statistical and machine learning tools on structural and sequential data, sometimes with reference to the existing body of protein structure knowledge. In the context of PPIs — as in other domains— deep learning shows promise both for exceeding current predictive performance and for circumventing limitations from which other approaches suffer.
 
-Many early machine learning and deep learning applications to PPI focused on the extraction
-of known relationships from the literature through text mining
-[@doi:10.1016/j.jbi.2007.11.008] (*Add a citation for a deep learning text mining paper here.*). However, computational methods show increasing
-promise for the prediction of novel PPIs. Singh et al.
-[@doi:10.1093/nar/gkq481] used a structure-based machine learning
-approach called Struct2Net to predict PPIs from comparisons of sequence data
-to structures in the Protein Data Bank. While this approach had the advantage of
-requiring only sequence data— not functional information like previous work
-it was still limited by the coverage of the Protein Data Bank. (*Zhang et al.
-[@doi:10.1038/nature11503] trained a Bayesian network on
-three-dimensional structural information which predicted PPIs with accuracy
-near and even somewhat above that of high-throughput experimentation.*)
+One of the key difficulties in applying deep learning techniques to binding prediction is the difficulty of representing peptide and protein sequences in a meaningful way. Because many studies used predefined higher-level features, one of the benefits of deep learning— automatic feature extraction— is not fully leveraged. More work is needed to determine the best ways to represent raw protein sequence information so that the full benefits of deep learning as automatic feature extraction can be realized.
 
-In the context of PPIs and protein binding— as in other domains— deep learning
-shows promise both for exceeding current predictive performance and for circumventing
-limitations from which other types of approaches suffer.
-DeepPPI [@doi:10.1021/acs.jcim.7b00028] was able to make high-quality PPI predictions
-from a set of protein descriptors by using a pair of deep neural sub-networks to
-learn the features of individual proteins which are useful for predicting interactions.
-The outputs of the two neural networks were then combined as inputs for the final
-stage of the neural network which made predictions.
+DeepPPI [@doi:10.1021/acs.jcim.7b00028] made PPI predictions from a set of sequence and composition protein descriptors using a two-stage deep neural network. First a pair of deep neural sub-networks learned those features of individual proteins which are useful for predicting interactions. The second and final stage of the neural network made predictions based on the outputs of the two sub-networks— one for each protein— by using only higher-level features from each protein individually. DeepPPI showed a significant improvement over classical machine learning  algorithms and previous shallow learning approaches in all but the smallest training data-sets.
 
-While many structures are now known, a sizeable portion of protein structures
-remain unknown [@doi:10.1126/science.aah4043]. Therefore, the ability to predict
-PPI and protein binding based on protein sequence is also extremely useful.
+Sun et al. [@doi:10.1186/s12859-017-1700-2] used autocovariance, a coding scheme which returns uniform-size vectors describing the covariance between variables at various positions. A stacked autoencoder paired with a softmax classifier gave predictions as probabilities of interaction. Their model achieved excellent performance on an external test dataset, as well as high accuracies on  protein sequence data from model organism species on which it was also tested.
 
-Sun et al. [@doi:10.1186/s12859-017-1700-2] used sequence-based data in a stacked
-autoencoder to predict PPIs in humans with high accuracy. Their model additionally
-performed well when generalized to protein sequence data from model organism species.
+Wang et al. [@doi:10.1039/C7MB00188F] used deep learning as an intermediate step in PPI prediction. They first extracted sequence descriptors called Zernike moments, which have often been used in image analysis. A stacked sparse autoencoder was used to reduce feature dimensions and noisiness before a novel type of classification vector machine made PPI predictions.
 
-Wang et al. [@doi:10.1039/C7MB00188F] extracted Zernike moments from protein sequences
-and utilized a stacked sparse autoencoder to reduce feature dimensions and noisiness
-before making PPI predictions with a unique classification vector machine.
+Beyond predicting whether or not two proteins interact, Du et al. showed that a tandem stacked-autoencoder/deep-neural-network method could be used to predict residue contacts for the interfacial regions of interacting proteins. A combination of a hidden Markov model with Fisher scores yielded uniform-length features for each residue. Their method significantly exceeded classical machine learning accuracy [@doi:10.1016/j.ymeth.2016.06.001].
 
 
-Beyond predicting whether two proteins interact, Du et al. showed that a tandem
-stacked-autoencoder/deep-neural-network method could be used to predict residue
-contacts for the interfacial regions of interacting protieins. Their method
-exceeded classical machine learning accuracy by 15 percent
-[@doi:10.1016/j.ymeth.2016.06.001].
+### MHC-peptide binding
 
-#### MHC subsection
+An important type of PPI involves the immune system's ability to recognize the body's own cells. The major histocompatibility complex (MHC) play a key role in regulating this process by binding antigens and displaying them on the cell surface to be recognized by T cells. Due to its importance in immunity and immune response, peptide-MHC binding prediction is an important problem in computation biology. Pan-allelic MHC-peptide binding prediction is a useful area of research as well, due to the highly polymorphic nature of the MHC-encoding gene region. Several approaches have shown promise towards both of these tasks.
 
-An important type of PPI involves the recognition of an organisms own cells by
-the immune system. Because the major histocompatibility complex (MHC) play a significant
-role in regulating this proces, peptide-MHC binding prediction is an important problem in
-computation biology. Several approaches have shown promise.
+NetMHC [@doi:10.1110/ps.0239403 @doi:10.1093/bioinformatics/btv639] uses sequence alignment to train a shallow neural network on variable length peptides in order to predict allele-specific binding. All possible deletions and insertions were applied to peptides of lengths other that 9, and the best predictive score of these was taken as optimal.
 
-Kuksa et al. [@doi:10.1093/bioinformatics/btv371] pre-trained a higher-order
-neural network using a semi-restricted Boltzmann machine and showed performance
-above the state-of-the-art with the higher-order neural network, as well as with
-a more standard deep neural network. They also propose a higher-order SVM,
-which, when paired with the HONN showed superior performance even to DNN.
+NetMHCpan [@doi:10.1007/s00251-008-0341-z @doi:10.1186/s13073-016-0288-x] uses a pseudo-sequence representation of the MHC class I molecule segment which includes only peptide contact residues and only those which were polymorphic. The sequences of the peptide and MHC were then represented using both sparse vector encoding and Blosum encoding, in which amino acids are encoded by a matrix score vector. A shallow neural network was trained on the encoded peptide sequence and MHC pseudosequence. Because of NetMHCpan's unique representation of the MHC amino acid sequence, it is the only method covered here that can make peptide affinity predictions for uncharacterized or poorly characterized MHC. In recent updates [@doi:10.1186/s13073-016-0288-x], NetMHCpan has been expanded to use gapped sequence alignment characteristic of NetMHC, [@doi:10.1093/bioinformatics/btv639] making NetMHCpan-3.0 capable of handling both many alleles and many peptide lengths.
 
+MHCflurry [@doi:10.1101/054775] transforms peptide sequences using a NetMHC-type length adjustment before encoding each amino acid using a corresponding learned vector representation. In training the MHCflurry feed-forward neural network, the authors impute missing MHC-peptide binding affinities using a Gibbs sampling method, showing that imputation improves performance up to roughly 100 training examples.
+
+Kuksa et al. [@doi:10.1093/bioinformatics/btv371] pre-trained a higher-order neural network (HONN) using a semi-restricted Boltzmann machine and compared performance with a deep neural network (DNN). They also propose a higher-order SVM, which, when paired with the HONN showed superior performance exceeding the DNN. The authors use Blosum encoding for 9-mer peptides.
+
+Vang et al. [@doi:10.1093/bioinformatics/btx264] combined deep learning with tools from natural language processing to approach 9-mer peptides. They employ a technique called distributed representation to map amino acids onto a 15-dimensional vector space based on their spatial relation to other amino acids. A convolutional neural network, titled HLA-CNN, takes peptide sequences and substitutes individual amino acids with their corresponding vectors.
+
+Bhattacharya et al. used a gated recurrent neural network method called MHCnuggets to overcome the difficulty of multiple length peptides. Under this framework, they used smoothed sparse encoding to represent amino acids individually.
+
+In a comparison of several current methods, Bhattacharya et al. found that the top methods— NetMHCpan, NetMHC, MHCflurry, and MHCnuggets— showed comparable performance, but large differences in speed. In their analysis, they found that convolutional neural networks showed comparatively poor performance, while shallow and recurrent neural networks performed the best.  They found that MHCnuggets, the recurrent neural network was by far the fastest training among the top performing methods.
 
 
-([@doi:10.1093/bioinformatics/btq483] *Reference the problem with lacking
-negative data in the datasets. Too much is positive, it overinflates the
-estimates. Also this paper gives a method to generate more negative data.
-Could potentially also tangent into generating negative data.*)
+### PPI networks
+
 
 
 ### Morphological phenotypes
